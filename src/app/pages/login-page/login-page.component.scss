@@ -1,0 +1,35 @@
+:host {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 20px;
+   align-items: center;
+   align-content: center;
+   height: 100vh;
+   margin: 0 5%;
+}
+
+.login-page__logo {
+   align-self: center;
+   max-width: 500px;
+   width: 100%;
+   height: auto;
+   border-radius: 16px;
+}
+
+.login-form {
+   align-self: center;
+   max-width: 500px;
+   &__btn {
+      width: 100%;
+   }
+}
+
+@media (max-width: 800px) {
+   :host {
+     grid-template-columns: 1fr; 
+   }
+ 
+   .login-form, .login-page__logo {
+     max-width: 100%; 
+   }
+}
