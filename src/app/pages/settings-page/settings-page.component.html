@@ -1,0 +1,51 @@
+@if (profile$ | async; as profile) {
+   <app-profile-header [profile]="profile"></app-profile-header>
+   <div class="profile-form__wrapper">
+      <form class="profile-form" [formGroup]="form">
+         <div class="two-columns">
+            <label class="form-label">
+               <span class="form-label__text">Firstname:</span>
+               <input type="text" class="form-input" formControlName="firstName">
+            </label>
+            <label class="form-label">
+               <span class="form-label__text">Lastname:</span>
+               <input type="text" class="form-input" formControlName="lastName">
+            </label>
+         </div>
+         <label class="form-label">
+            <span class="form-label__text">Username:</span>
+            <input type="text" class="form-input" formControlName="username">
+         </label>
+         <label class="form-label">
+            <span class="form-label__text">About me:</span>
+            <textarea class="form-input form-textarea"  
+               formControlName="description"
+               rows="4"
+            ></textarea>
+         </label>
+         <label class="form-label">
+            <span class="form-label__text">Avatar:</span>
+            <app-avatar-upload></app-avatar-upload>
+         </label>
+         <label class="form-label">
+            <span class="form-label__text">Stack:</span>
+            <div class="stack-wrapper">
+               @for (stack of stackList.controls; track stack; let i = $index) {
+                  <div class="skill" >
+                     <div class="skill__name">{{ stack.value }}</div>
+                     <button class="skill__remove-btn btn-icon" (click)="removeStack(i)">
+                        <img src="/assets/svg/remove.svg" alt="remove icon">
+                     </button>
+                  </div>
+               }
+            </div>
+            <input type="text" class="form-input" [formControl]="newStack" (keydown.enter)="addStack($event)">
+         </label>
+      </form>
+   </div>
+   <div>
+      <div>
+         <button class="btn" (click)="onSave()">Save</button>
+      </div>
+   </div>
+}

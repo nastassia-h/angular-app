@@ -1,4 +1,25 @@
-.profile-card__wrapper {
-   display: grid;
-   gap: 8px;
+@mixin color-spot($color, $x, $y, $size, $blur) {
+   content: '';
+   position: fixed;
+   background-color: $color;
+   top: $y;
+   left: $x;
+   width: $size;
+   height: $size;
+   border-radius: 50%;
+   filter: blur($blur);
+   z-index: -1;
+ }
+
+:host {
+   position: relative;
+
+   &::before {
+      @include color-spot(rgba(255, 255, 255, 0.9), 90%, 20%, 200px, 170px);
+   }
+
+   &::after {
+      @include color-spot(rgba(174, 122, 255, 0.7), 70%, 50%, 500px, 200px);
+   }
 }
+

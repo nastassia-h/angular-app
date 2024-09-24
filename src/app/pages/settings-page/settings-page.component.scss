@@ -1,0 +1,61 @@
+:host {
+   display: grid;
+   grid-gap: 48px;
+   grid-template-columns:  repeat(auto-fill, minmax(322px, 600px));
+   padding: 24px;
+}
+
+.profile-form {
+   padding: 32px;
+   border: 1px solid var(--light-color);
+   background: var(--dark-color);
+   display: grid;
+   grid-gap: 20px;
+
+   &__wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+   }
+}
+
+.two-columns {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-gap: 20px;
+}
+
+.stack-wrapper {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+}
+
+.skill {
+   background: var(--primary-color);
+   padding: 10px 15px;
+   border-radius: 8px;
+   display: grid;
+   grid-template-columns: 1fr 24px;
+   align-items: center;
+   align-content: center;
+   grid-gap: 10px;
+   
+
+
+   &__name {
+
+   }
+
+   &__remove-btn {
+      
+
+      img {
+         display: block;
+         align-content: end;
+         width: 24px;
+         height: 24px;
+      }
+      
+   }
+}

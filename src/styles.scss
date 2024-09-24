@@ -6,6 +6,8 @@
    --light-color: #fff;
    --primary-color: #ae7aff;
    --gray-color: #5f646d;
+   --dark-hover-color: #161616;
+   --light-transparent-color: rgba(255, 255, 255, 0.75);
 }
 
 *,
@@ -16,34 +18,11 @@
    padding: 0;
 }
 
-@mixin color-spot($color, $x, $y, $size, $blur) {
-   content: '';
-   position: absolute;
-   background-color: $color;
-   top: $y;
-   left: $x;
-   width: $size;
-   height: $size;
-   border-radius: 50%;
-   filter: blur($blur);
-   z-index: -1;
- }
-
 body {
-   position: relative;
-   min-height: 100vh;
-   overflow-x: hidden;
+   min-height: 100dvh;
    background: var(--dark-color);
    color: var(--light-color);
    font-family: "Roboto Mono", sans-serif;
-
-   &::before {
-      @include color-spot(rgba(255, 255, 255, 0.9), 90%, 20%, 200px, 170px);
-   }
-
-   &::after {
-      @include color-spot(rgba(174, 122, 255, 0.7), 70%, 50%, 500px, 200px);
-   }
 }
 
 .skill-tag {
@@ -65,6 +44,13 @@ body {
    line-height: 24px;
    border-radius: 4px;
    cursor: pointer;
+}
+
+.btn-icon {
+   background: none;
+   border: none;
+   cursor: pointer;
+   padding: 0;
 }
 
 .btn-shadow {
@@ -100,6 +86,12 @@ body {
    line-height: 20px;
 }
 
+.medium-text {
+   font-size: 12px;
+   font-weight: 500;
+   line-height: 16px;
+}
+
 .control-label {
    font-weight: 700;
    font-size: 12px;
@@ -118,4 +110,40 @@ body {
    font-size: 14px;
    line-height: 21px;
    color: var(--light-color);
+}
+
+.form-label {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: 16px;
+
+   &__text {
+      color: var(--light-transparent-color);
+   }
+}
+
+.form-input {
+   font-size: 14px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: 21px;
+   border: none;
+   background: none;
+   color: var(--light-color);
+   border-bottom: 1px solid var(--light-color);
+   height: 33px;
+
+   &:focus-visible {
+      outline: 1px solid var(--primary-color);
+   }
+}
+
+.form-textarea {
+   height: 84px;
+   min-width: 100%;
+   resize: none;
 }

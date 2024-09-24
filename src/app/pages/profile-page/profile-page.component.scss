@@ -1,0 +1,79 @@
+.profile-page__header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.profile-header {
+   &__settings {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+   }
+}
+
+.profile-page__body {
+   display: grid;
+   grid-gap: 64px;
+   grid-template-columns: 1fr 350px;
+   padding: 24px;
+}
+
+.profile-page__subscribers {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   gap: 16px;
+}
+
+.profile-page__skills {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 4px;
+   align-content: flex-start;
+}
+
+.subscribers-wrapper {
+   display: grid;
+   grid-auto-flow: column;
+   grid-gap: 6px;
+   justify-content: flex-start;
+}
+
+.subscriber-avatar-btn {
+
+   img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+   }
+}
+
+.to-subscribers-search {
+   display: block;
+   position: relative;
+   width: 16px;
+   height: 16px;
+   background: var(--light-color);
+   border-radius: 50%;
+
+   &::after,
+   &::before {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 2px;
+      background: var(--gray-color);
+      top: calc(50% - 1px);
+      left: calc(50% - 5px);
+   }
+
+   &::after {
+      transform: rotate(90deg);
+   }
+}
+
+.skill-tag {
+
+}
