@@ -8,6 +8,8 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 import { provideState } from '@ngrx/store';
 import { ProfileEffects, profileFeature } from './data';
 import { provideEffects } from '@ngrx/effects';
+import { provideStates } from '@ngxs/store';
+import { ProfileState } from './data/store/state.ngxs';
 
 export const routes: Routes = [
    {path: '', component: LayoutComponent, children: [
@@ -16,6 +18,7 @@ export const routes: Routes = [
          path: 'search', 
          component: SearchPageComponent,
          providers: [
+            provideStates([ProfileState]),
             provideState(profileFeature),
             provideEffects(ProfileEffects)
          ]

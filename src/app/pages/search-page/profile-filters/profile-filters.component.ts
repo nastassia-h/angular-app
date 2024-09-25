@@ -35,6 +35,8 @@ export class ProfileFiltersComponent implements OnDestroy {
     )
     .subscribe(formValue => {
       this.store.dispatch(profileActions.filterEvents({filters: formValue}))
+      // ngxs
+      // this.store.dispatch(new FilterEvents(formValue)); store from ngxs
     })
 
     const filters = this.store.selectSignal(selectProfileFilters);

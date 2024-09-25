@@ -18,6 +18,9 @@ export class SearchPageComponent {
   store = inject(Store);
   profiles = this.store.selectSignal(selectFilteredProfiles);
 
+  // ngxs
+  // profiles = this.store.selectSignal(ProfileState.getProfiles); store from ngxs
+
   constructor() {
     
   }
