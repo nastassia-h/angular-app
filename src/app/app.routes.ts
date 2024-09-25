@@ -10,6 +10,7 @@ import { ProfileEffects, profileFeature } from './data';
 import { provideEffects } from '@ngrx/effects';
 import { provideStates } from '@ngxs/store';
 import { ProfileState } from './data/store/state.ngxs';
+import { profileStore } from './data/store/profile.store';
 
 export const routes: Routes = [
    {path: '', component: LayoutComponent, children: [
@@ -18,6 +19,7 @@ export const routes: Routes = [
          path: 'search', 
          component: SearchPageComponent,
          providers: [
+            profileStore,
             provideStates([ProfileState]),
             provideState(profileFeature),
             provideEffects(ProfileEffects)
