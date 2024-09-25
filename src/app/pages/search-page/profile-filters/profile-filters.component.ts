@@ -1,9 +1,9 @@
 import { Component, inject, OnDestroy } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormArray, FormControl } from '@angular/forms';
 import { debounceTime, startWith, Subscription, switchMap } from 'rxjs';
-import { ProfileService } from '../../../data/services/profile.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
+import { Store } from '@ngrx/store';
+import { profileActions, selectProfileFilters } from '../../../data';
 
 @Component({
   selector: 'app-profile-filters',
@@ -14,7 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ProfileFiltersComponent implements OnDestroy {
   fb = inject(FormBuilder);
-  profileService = inject(ProfileService);
+  store = inject(Store);
 
   form = this.fb.group({
     firstName: [''],
@@ -28,12 +28,24 @@ export class ProfileFiltersComponent implements OnDestroy {
     this.searchFormSub = this.form.valueChanges.pipe(
       startWith({}),
       debounceTime(300),
-      switchMap(formValue => {
-        return this.profileService.filterAccounts(formValue)
-      }),
-      takeUntilDestroyed() // only from angular 17
+      // switchMap(formValue => {
+      //   return this.profileService.filterAccounts(formValue)
+      // }),
+      //takeUntilDestroyed() // only from angular 17
     )
-    .subscribe()
+    .subscribe(formValue => {
+      this.store.dispatch(profileActions.filterEvents({filters: formValue}))
+    })
+
+    const filters = this.store.selectSignal(selectProfileFilters);
+    this.form.patchValue(filters());
+
+    const stackArray = filters()?.['stack']; 
+    this.stackList.clear(); 
+    
+    stackArray?.forEach((stackItem: string) => {
+      this.stackList.push(new FormControl(stackItem));
+    });
   }
 
   ngOnDestroy(): void {

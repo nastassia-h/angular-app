@@ -5,11 +5,21 @@ import { LayoutComponent } from './common-ui/layout/layout.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { canActivateAuth } from './auth/access.guard';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { provideState } from '@ngrx/store';
+import { ProfileEffects, profileFeature } from './data';
+import { provideEffects } from '@ngrx/effects';
 
 export const routes: Routes = [
    {path: '', component: LayoutComponent, children: [
       {path: '', redirectTo: 'profile/me', pathMatch: 'full'},
-      {path: 'search', component: SearchPageComponent},
+      {
+         path: 'search', 
+         component: SearchPageComponent,
+         providers: [
+            provideState(profileFeature),
+            provideEffects(ProfileEffects)
+         ]
+      },
       {path: 'settings', component: SettingsPageComponent},
       {path: 'profile/:id', component: ProfilePageComponent}
    ],
