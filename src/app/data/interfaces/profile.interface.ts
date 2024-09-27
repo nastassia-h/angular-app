@@ -10,3 +10,10 @@ export interface Profile {
    stack: string[],
    city: string
 }
+
+export interface ProfileShort {
+   id: number,
+   username: string,
+   avatarUrl: string,
+   subscribersAmount: number
+}

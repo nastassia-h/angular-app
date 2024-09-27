@@ -1,0 +1,31 @@
+:host {
+   background: var(--dark-color);
+   padding: 4px 16px;
+   display: grid;
+   grid-template-columns: 32px 1fr;
+   align-items: center;
+   grid-gap: 8px;
+}
+
+.comment-body {
+   
+}
+
+.comment__header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.comment__author, .comment__date {
+   color: var(--light-transparent-color);
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 700;
+   line-height: 16px;
+}
+
+.comment__content {
+   max-width: 100%;
+   line-break: anywhere;
+}

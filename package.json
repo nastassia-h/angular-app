@@ -22,6 +22,7 @@
     "@ngrx/signals": "^18.0.2",
     "@ngrx/store": "^18.0.2",
     "@ngxs/store": "^18.1.1",
+    "moment": "^2.30.1",
     "ngx-cookie-service": "^18.0.0",
     "rxjs": "~7.8.0",
     "tik-talk": "file:",
@@ -30,8 +31,13 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.4",
+    "@angular-devkit/core": "^18.2.4",
+    "@angular-devkit/schematics": "^18.2.4",
     "@angular/cli": "^18.2.4",
     "@angular/compiler-cli": "^18.2.0",
+    "@nx/angular": "19.8.1",
+    "@nx/workspace": "19.8.1",
+    "@schematics/angular": "^18.2.4",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
@@ -39,6 +45,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nx": "19.8.1",
     "typescript": "~5.5.2"
   }
 }

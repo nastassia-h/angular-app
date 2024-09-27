@@ -16,7 +16,7 @@
 .profile-page__body {
    display: grid;
    grid-gap: 64px;
-   grid-template-columns: 1fr 350px;
+   grid-template-columns: minmax(300px, 1fr) 350px;
    padding: 24px;
 }
 

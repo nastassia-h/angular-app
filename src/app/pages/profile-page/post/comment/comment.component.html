@@ -1,0 +1,12 @@
+@if(comment(); as comment) {
+   <app-avatar-circle [avatarUrl]="comment.author.avatarUrl" class="size32">
+   </app-avatar-circle>
+   <div class="comment-body">
+      <div class="comment__header">
+         <strong class="comment__author">{{ comment.author.username }}</strong>
+         <span class="comment__date">{{ comment.createdAt | date:"dd.MM.y"  }}</span>
+      </div>
+      <div class="comment__content medium-text">{{ comment.text }}</div>
+   </div>
+}
+
