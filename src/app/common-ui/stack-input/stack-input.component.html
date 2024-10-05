@@ -1,0 +1,22 @@
+<label class="form-label">
+   <span class="form-label__text">
+      <ng-content></ng-content>
+   </span>
+   <div class="stack-control">
+      @for (stack of value$ | async; let i = $index; track i) {
+         <div class="skill" >
+            <div class="skill__name">{{ stack }}</div>
+            <button type="button" class="skill__remove-btn btn-icon" (click)="removeStack(stack)">
+               <img src="/assets/svg/remove.svg" alt="remove icon">
+            </button>
+         </div>
+      }
+      <input 
+         placeholder="Add..." 
+         type="text" 
+         class="stack-input" 
+         [(ngModel)]="innerInput" 
+         (keydown.enter)="addStack($event)"
+      >
+   </div>
+</label>

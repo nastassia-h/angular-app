@@ -3,50 +3,15 @@
    padding: 16px 20px;
 }
 
-.profile-form {
+.two-columns {
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
    justify-content: space-between;
    gap: 20px;
 }
 
-.stack-wrapper {
-   display: flex;
-   gap: 10px;
-   flex-wrap: wrap;
-}
-
 .form-label {
    &__text {
       flex: 1;
-   }
-}
-
-.skill {
-   background: var(--primary-color);
-   padding: 8px 10px;
-   border-radius: 8px;
-   display: grid;
-   grid-template-columns: 1fr 24px;
-   align-items: center;
-   align-content: center;
-   grid-gap: 10px;
-   
-
-
-   &__name {
-
-   }
-
-   &__remove-btn {
-      
-
-      img {
-         display: block;
-         align-content: end;
-         width: 24px;
-         height: 24px;
-      }
-      
    }
 }

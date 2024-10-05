@@ -27,20 +27,7 @@
             <span class="form-label__text">Avatar:</span>
             <app-avatar-upload></app-avatar-upload>
          </label>
-         <label class="form-label">
-            <span class="form-label__text">Stack:</span>
-            <div class="stack-wrapper">
-               @for (stack of stackList.controls; track stack; let i = $index) {
-                  <div class="skill" >
-                     <div class="skill__name">{{ stack.value }}</div>
-                     <button class="skill__remove-btn btn-icon" (click)="removeStack(i)">
-                        <img src="/assets/svg/remove.svg" alt="remove icon">
-                     </button>
-                  </div>
-               }
-            </div>
-            <input type="text" class="form-input" [formControl]="newStack" (keydown.enter)="addStack($event)">
-         </label>
+         <app-stack-input formControlName="stack">Stack:</app-stack-input>
       </form>
    </div>
    <div>

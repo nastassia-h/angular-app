@@ -23,12 +23,4 @@ export class SearchPageComponent {
 
   //ngrx signal store
   // profiles = this.store.profiles; store = inject(ProfileStore)
-
-  constructor() {
-    
-  }
-
-  ngOnDestroy() {
-    console.log(this.profiles())
-  }
 }

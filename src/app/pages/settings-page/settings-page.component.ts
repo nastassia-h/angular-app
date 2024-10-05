@@ -7,11 +7,12 @@ import { FormBuilder, ReactiveFormsModule, Validators, FormArray, FormControl } 
 import { Profile } from '../../data/interfaces/profile.interface';
 import { firstValueFrom } from 'rxjs';
 import { AvatarUploadComponent } from "./avatar-upload/avatar-upload.component";
+import { StackInputComponent } from "../../common-ui/stack-input/stack-input.component";
 
 @Component({
   selector: 'app-settings-page',
   standalone: true,
-  imports: [ProfileHeaderComponent, AsyncPipe, ReactiveFormsModule, AvatarUploadComponent],
+  imports: [ProfileHeaderComponent, AsyncPipe, ReactiveFormsModule, AvatarUploadComponent, StackInputComponent],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss'
 })
@@ -29,32 +30,16 @@ export class SettingsPageComponent {
     lastName: ['', Validators.required],
     username: [{value: '', disabled: true}, Validators.required],
     description: [''],
-    stack: this.fb.array([])
+    stack: [[] as string[]]
   })
-
-  newStack = new FormControl('');
 
   constructor() {
     effect(() => {
       const profile = this.profileService.me();
-      this.form.patchValue({
-        firstName: profile?.firstName,
-        lastName: profile?.lastName,
-        username: profile?.username,
-        description: profile?.description,
-      });
-
-      const stackArray = this.profileService.me()?.stack; 
-      this.stackList.clear(); 
-      
-      stackArray?.forEach((stackItem: string) => {
-        this.stackList.push(new FormControl(stackItem));
-      });
+      if (profile) {
+        this.form.patchValue(profile)
+      }
     })
-  }
-
-  get stackList(): FormArray {
-    return this.form.get('stack') as FormArray;
   }
 
   onSave() {
@@ -70,19 +55,5 @@ export class SettingsPageComponent {
     const formValue: Partial<Profile> = this.form.getRawValue() as Partial<Profile>;
 
     firstValueFrom(this.profileService.patchProfile(formValue))
-  }
-
-  addStack(event: Event): void {
-    event.preventDefault(); 
-    const stackName = this.newStack.value?.trim();
-
-    if (stackName && !this.stackList.controls.some(control => control.value === stackName)) {
-      this.stackList.push(new FormControl(stackName)); 
-      this.newStack.reset(); 
-    }
-  }
-
-  removeStack(index: number): void {
-    this.stackList.removeAt(index);
   }
 }

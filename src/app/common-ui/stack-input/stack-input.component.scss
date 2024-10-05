@@ -1,0 +1,44 @@
+.stack-control {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+   padding: 8px;
+   border-bottom: 1px solid var(--light-color);
+}
+
+.skill {
+   background: var(--primary-color);
+   padding: 10px 15px;
+   border-radius: 8px;
+   display: grid;
+   grid-template-columns: 1fr 24px;
+   align-items: center;
+   align-content: center;
+   grid-gap: 10px;
+   
+   &__remove-btn {
+
+      img {
+         display: block;
+         align-content: end;
+         width: 24px;
+         height: 24px;
+      }
+      
+   }
+}
+
+.stack-input {
+   font-size: 14px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: 21px;
+   border: none;
+   background: none;
+   color: var(--light-color);
+   height: 44px;
+
+   &:focus-visible {
+      outline: none;
+   }
+}

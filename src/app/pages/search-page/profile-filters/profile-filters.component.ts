@@ -4,11 +4,12 @@ import { debounceTime, startWith, Subscription, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { profileActions, selectProfileFilters } from '../../../data';
+import { StackInputComponent } from "../../../common-ui/stack-input/stack-input.component";
 
 @Component({
   selector: 'app-profile-filters',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, StackInputComponent],
   templateUrl: './profile-filters.component.html',
   styleUrl: './profile-filters.component.scss'
 })
@@ -19,7 +20,7 @@ export class ProfileFiltersComponent implements OnDestroy {
   form = this.fb.group({
     firstName: [''],
     lastName: [''],
-    stack: this.fb.array([])
+    stack: [[] as string[]]
   })
 
   searchFormSub!: Subscription
@@ -44,37 +45,9 @@ export class ProfileFiltersComponent implements OnDestroy {
 
     const filters = this.store.selectSignal(selectProfileFilters);
     this.form.patchValue(filters());
-
-    const stackArray = filters()?.['stack']; 
-    this.stackList.clear(); 
-    
-    stackArray?.forEach((stackItem: string) => {
-      this.stackList.push(new FormControl(stackItem));
-    });
   }
 
   ngOnDestroy(): void {
       this.searchFormSub.unsubscribe()
   }
-
-  newStack = new FormControl('');
-
-  get stackList(): FormArray {
-    return this.form.get('stack') as FormArray;
-  }
-
-  addStack(event: Event): void {
-    event.preventDefault(); 
-    const stackName = this.newStack.value?.trim();
-
-    if (stackName && !this.stackList.controls.some(control => control.value === stackName)) {
-      this.stackList.push(new FormControl(stackName)); 
-      this.newStack.reset(); 
-    }
-  }
-
-  removeStack(index: number): void {
-    this.stackList.removeAt(index);
-  }
-
 }
