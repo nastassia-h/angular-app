@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostBinding, inject, signal } from '@angular/core';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
 import { RouterLink } from '@angular/router';
@@ -20,6 +20,11 @@ export class SidebarComponent {
   subscribers$ = this.profileService.getSubscribersShortList(1, 3);
   me = this.profileService.me;
 
+  @HostBinding('class.open')
+  isOpened = false
+  @HostBinding('class.close')
+  isClosed = false
+
 
   menu = [
     {
@@ -38,5 +43,15 @@ export class SidebarComponent {
 
   ngOnInit() {
     firstValueFrom(this.profileService.getMe())
+  }
+
+  openMenu() {
+    this.isOpened = true;
+    this.isClosed = false;
+  }
+
+  closeMenu() {
+    this.isOpened = false;
+    this.isClosed = true;
   }
 }

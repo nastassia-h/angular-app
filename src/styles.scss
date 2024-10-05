@@ -3,11 +3,15 @@
 
 :root {
    --dark-color: #000;
+   --dark-active-color: #161616;
    --light-color: #fff;
    --primary-color: #ae7aff;
    --gray-color: #5f646d;
    --dark-hover-color: #161616;
    --light-transparent-color: rgba(255, 255, 255, 0.75);
+   ---light-border: 1px solid var(--light-color);
+   --font-size: clamp(16px, calc(20px + (36 – 20) * (100vw - 768px)/(1920–768)), 48px);
+
 }
 
 *,
@@ -25,7 +29,6 @@
 
 body {
    height: 100dvh;
-   overflow-y: hidden;
    background: var(--dark-color);
    color: var(--light-color);
    font-family: "Roboto Mono", sans-serif;
@@ -100,6 +103,7 @@ body {
 }
 
 .control-label {
+   position: relative;
    font-weight: 700;
    font-size: 12px;
    line-height: 16px;

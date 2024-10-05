@@ -1,0 +1,37 @@
+:host {
+   width: 100%;
+   background: none;
+   border-bottom: var(---light-border);
+   padding: 24px 20px;
+   display: grid;
+   grid-template-columns: 32px 1fr;
+   grid-gap: 16px;
+   cursor: pointer;
+   font-family: 'Roboto Mono', sans-serif;
+
+   &:hover,
+   &:focus-visible,
+   &.active {
+      background: var(--dark-active-color);
+   }
+}
+
+.last-message {
+
+   &__wrapper {
+      color: var(--light-color);
+      display: flex;
+      text-align: left;
+      flex-direction: column;
+      gap: 16px;
+   }
+
+   &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      color: var(--light-transparent-color);
+   }
+}
+

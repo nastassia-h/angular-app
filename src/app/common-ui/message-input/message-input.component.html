@@ -1,0 +1,12 @@
+<app-avatar-circle
+   class="size32"
+   [avatarUrl]="avatarUrl()"
+></app-avatar-circle>   
+
+<textarea class="hidden-textarea"
+   [(ngModel)]="inputValue"
+   (input)="onTextAreaInput($event)"
+   placeholder="Type something..."
+></textarea>
+
+<button class="btn" (click)="onCreate()">Post</button>

@@ -1,0 +1,11 @@
+<div class="rating-input__wrapper">
+   @for(star of stars; let i = $index; track i) {
+      <div class="star-wrapper" (click)="rate(i + 1)">
+         @if(star) {
+            <span class="star-btn starred">⭐</span>
+         } @else {
+            <span class="star-btn not-starred">*</span>
+         }
+      </div>
+   }
+</div>

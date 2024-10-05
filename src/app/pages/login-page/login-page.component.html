@@ -1,26 +1,26 @@
 <form action="" class="login-form" [formGroup]="form" (ngSubmit)="onSubmit($event)">
    <h1 class="h1 mb60">Login</h1>
-   <label class="control-label mb16">
-      Username
-      <input class="control-input" type="text" placeholder="Enter login" formControlName="username">
-   </label>
-   <label class="control-label mb32">
-      Password
-      <div class="password-input">
-         <input class="control-input" 
-            [type]="isPasswordVisible() ? 'text' : 'password'" 
-            placeholder="Enter password" 
-            formControlName="password"
-         >
-         <button class="password-eye-btn" (click)="isPasswordVisible.set(!isPasswordVisible())">
-            @if (isPasswordVisible()) {
-               <img src="/assets/svg/eye-close-4.svg" alt="eye-close-icon" />
-            } @else {
-               <img src="/assets/svg/eye-open-4.svg" alt="eye-open-icon" />
-            }
-         </button>
-      </div>
-   </label>
+
+   <app-tt-input
+      placeholder="Enter login"
+      formControlName="username"
+   >Username</app-tt-input>
+   
+   <app-tt-input
+      [type]="isPasswordVisible() ? 'text' : 'password'" 
+      placeholder="Enter password"
+      formControlName="password"
+   >
+   Password
+   <button class="password-eye-btn" (click)="isPasswordVisible.set(!isPasswordVisible())">
+      @if (isPasswordVisible()) {
+         <img src="/assets/svg/eye-close-4.svg" alt="eye-close-icon" />
+      } @else {
+         <img src="/assets/svg/eye-open-4.svg" alt="eye-open-icon" />
+      }
+   </button>
+   </app-tt-input>
+
    <button class="btn login-form__btn btn-shadow" type="submit">Sign in</button>
 </form>
 <img class="login-page__logo" src="/assets/img/logo.png" alt="logo">

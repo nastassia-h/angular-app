@@ -27,4 +27,8 @@ export class SearchPageComponent {
   constructor() {
     
   }
+
+  ngOnDestroy() {
+    console.log(this.profiles())
+  }
 }

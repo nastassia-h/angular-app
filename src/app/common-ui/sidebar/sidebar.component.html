@@ -1,43 +1,54 @@
-<div class="sidebar-main">
-   <img class="sidebar__logo ml16 mb20" src="/assets/img/logo.png" alt="logo" width="80px">
-
-   <nav class="mb20">
-      <ul class="main-menu-list">
-            @for(item of menu; track item.label) {
-            <li>
-               <a class="menu-item" [routerLink]="[item.link]" routerLinkActive="active">
-                  <!-- <svg class="menu-item__icon" icon="home"></svg> -->
-                  <span>{{ item.label }}</span>
-               </a>
-            </li>
-            }
-      </ul>
-   </nav>
-
-   <p class="medium-text mb20">Subscribers</p>
-
-   @for(profile of subscribers$ | async; track profile.id) {
-      <app-subscriber-card [profile]="profile"></app-subscriber-card>
-   }
-
-   <div class="mt20 to-subscribers">
-      <a [routerLink]="['/subscribers']" class="to-subscribers-link medium-text">
-         All subscribers
-      </a>
+<div class="burger-btn" (click)="openMenu()">
+   <span class></span>
+</div>
+<div class="sidebar">
+   <div class="sidebar-main">
+      <div class="sidebar-header mb16">
+         <img class="sidebar__logo" src="/assets/img/logo.png" alt="logo" width="80px">
+         <div class="close-btn" (click)="closeMenu()">
+            <span></span>
+         </div>
+      </div>
+   
+      <nav class="mb20">
+         <ul class="main-menu-list">
+               @for(item of menu; track item.label) {
+               <li>
+                  <a class="menu-item" [routerLink]="[item.link]" (click)="closeMenu()" routerLinkActive="active">
+                     <!-- <svg class="menu-item__icon" icon="home"></svg> -->
+                     <span>{{ item.label }}</span>
+                  </a>
+               </li>
+               }
+         </ul>
+      </nav>
+   
+      <p class="medium-text mb20">Subscribers</p>
+   
+      @for(profile of subscribers$ | async; track profile.id) {
+         <app-subscriber-card [profile]="profile"></app-subscriber-card>
+      }
+   
+      <div class="mt20 to-subscribers">
+         <a [routerLink]="['/subscribers']" (click)="closeMenu()" class="to-subscribers-link medium-text">
+            All subscribers
+         </a>
+      </div>
    </div>
+   
+   <footer class="sidebar-footer mt20">
+      @if (me(); as me) {
+         @if (me.avatarUrl) {
+            <img class="sidebar-footer__avatar" [src]="me.avatarUrl | imgUrl" alt="me avatar">
+         } @else {
+            <img class="sidebar-footer__avatar" src="/assets/img/avatar.png" alt="avatar placeholder">
+         }
+         <div class="medium-text sidebar-footer__username">{{ me.username }}</div>
+         <a class="sidebar-footer__settings" [routerLink]="['settings']">
+            <img src="/assets/svg/settings.svg" alt="settings icon">
+         </a>
+      }
+   </footer>
 </div>
 
-<footer class="sidebar-footer mt20">
-   @if (me(); as me) {
-      @if (me.avatarUrl) {
-         <img class="sidebar-footer__avatar" [src]="me.avatarUrl | imgUrl" alt="me avatar">
-      } @else {
-         <img class="sidebar-footer__avatar" src="/assets/img/avatar.png" alt="avatar placeholder">
-      }
-      <div class="medium-text sidebar-footer__username">{{ me.username }}</div>
-      <a class="sidebar-footer__settings" [routerLink]="['settings']">
-         <img src="/assets/svg/settings.svg" alt="settings icon">
-      </a>
-   }
-</footer>
 

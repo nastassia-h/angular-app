@@ -4,13 +4,13 @@
    gap: 20px;
    align-items: center;
    align-content: center;
-   height: 100vh;
+   //height: 100%;
    margin: 0 5%;
 }
 
 .login-page__logo {
    align-self: center;
-   max-width: 500px;
+   max-width: 400px;
    width: 100%;
    height: auto;
    border-radius: 16px;
@@ -25,9 +25,9 @@
 }
 
 .password {
-   &-input {
-      position: relative;
-   }
+   // &-input {
+   //    position: relative;
+   // }
 
    &-eye-btn {
       position: absolute;
@@ -35,18 +35,24 @@
       background: none;
       cursor: pointer;
       color: white;
-      top: calc(50% - 25px/2);
+      top: calc(50% - 1px);
       right: 12px;
       width: 25px;
    }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
    :host {
      grid-template-columns: 1fr; 
    }
  
    .login-form, .login-page__logo {
      max-width: 100%; 
+   }
+}
+
+@media (min-width: 768px) {
+   :host {
+     height: 100vh;
    }
 }

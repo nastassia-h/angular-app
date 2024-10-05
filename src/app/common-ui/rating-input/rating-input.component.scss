@@ -1,0 +1,15 @@
+.rating-input__wrapper {
+   display: flex;
+   gap: 8px;
+}
+
+.star-btn {
+   cursor: pointer;
+}
+
+:host.disabled {
+   .star-btn {
+      opacity: 0.25;
+      cursor: default;
+   }
+}

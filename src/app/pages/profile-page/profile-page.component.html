@@ -5,6 +5,8 @@
          <a class="btn profile-header__settings" [routerLink]="['/settings']">Edit
             <img class="to-settings-icon" src="/assets/svg/settings.svg" alt="settings icon" width="18px" height="18px">
          </a>
+      } @else {
+         <button class="btn profile-header__settings" (click)="createChat(profile.id)">Send message</button>
       }
    </header>
    <main class="profile-page__body">
