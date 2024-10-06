@@ -8,11 +8,12 @@ import { Profile } from '../../data/interfaces/profile.interface';
 import { firstValueFrom } from 'rxjs';
 import { AvatarUploadComponent } from "./avatar-upload/avatar-upload.component";
 import { StackInputComponent } from "../../common-ui/stack-input/stack-input.component";
+import { AddressInputComponent } from "../../common-ui/address-input/address-input.component";
 
 @Component({
   selector: 'app-settings-page',
   standalone: true,
-  imports: [ProfileHeaderComponent, AsyncPipe, ReactiveFormsModule, AvatarUploadComponent, StackInputComponent],
+  imports: [ProfileHeaderComponent, AsyncPipe, ReactiveFormsModule, AvatarUploadComponent, StackInputComponent, AddressInputComponent],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss'
 })
@@ -30,7 +31,8 @@ export class SettingsPageComponent {
     lastName: ['', Validators.required],
     username: [{value: '', disabled: true}, Validators.required],
     description: [''],
-    stack: [[] as string[]]
+    stack: [[] as string[]],
+    city: ['', Validators.required]
   })
 
   constructor() {

@@ -1,0 +1,20 @@
+<app-tt-input [formControl]="innerSearchControl"></app-tt-input>
+
+
+@if (suggestions$ | async; as suggestions) {
+   @if (isDropdownOpened()) {
+      <div class="suggestions-dropdown">
+         @for (suggest of suggestions; track suggest) {
+            <button
+               (click)="onSuggestionPick(suggest)" 
+               class="suggest-btn"
+            >{{ suggest }}</button>
+         }
+      </div>
+   }
+   
+}
+
+
+
+
