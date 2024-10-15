@@ -8,12 +8,16 @@ import { pipe, switchMap, tap } from 'rxjs';
 
 type ProfileStateType = {
    profiles: Profile[],
-   profileFilters: Record<string, any>
+   profileFilters: Record<string, any>,
+   page: number,
+   size: number
 }
 
 const initialState: ProfileStateType = {
    profiles: [],
-   profileFilters: {}
+   profileFilters: {},
+   page: 1,
+   size: 10
 }
 
 export const profileStore = signalStore(

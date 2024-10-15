@@ -32,7 +32,8 @@ export class SettingsPageComponent {
     username: [{value: '', disabled: true}, Validators.required],
     description: [''],
     stack: [[] as string[]],
-    city: ['', Validators.required]
+    //address: [{city: 'Katowice', street: 'SJHdh', building: 'sdhjsd'}],
+    //city: ['', Validators.required]
   })
 
   constructor() {

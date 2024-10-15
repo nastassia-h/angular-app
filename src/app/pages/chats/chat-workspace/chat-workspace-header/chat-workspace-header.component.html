@@ -1,1 +1,4 @@
-<p>chat-workspace-header works!</p>
+@if (profile(); as profile) {
+   <app-avatar-circle class="size32" [avatarUrl]="profile.avatarUrl"></app-avatar-circle>
+   <div class="subtitle">{{ profile.firstName }}  {{ profile.lastName }}</div>
+}

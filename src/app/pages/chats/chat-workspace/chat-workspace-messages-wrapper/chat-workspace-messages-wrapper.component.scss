@@ -1,3 +1,20 @@
 :host {
    flex: 1;
+   width: 100%;
+   max-height: calc(100% - 53px);
+}
+
+.messages-container {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+   padding: 16px;
+   max-height: calc(100% - 70px);
+   overflow-y: scroll;
+}
+
+.message-input {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
 }

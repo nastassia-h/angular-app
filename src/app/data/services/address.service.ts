@@ -25,15 +25,16 @@ export class AddressService {
       }
     }).pipe(
       map(res => {
-        return Array.from(
-          new Set(
-            res.suggestions.map(
-              (suggestion: Suggestion) => {
-                return suggestion.data.city
-              }
-            ).filter(val => val && val.length)
-          )
-        )
+        return res.suggestions
+        // return Array.from(
+        //   new Set(
+        //     res.suggestions.map(
+        //       (suggestion: Suggestion) => {
+        //         return suggestion.data.city
+        //       }
+        //     ).filter(val => val && val.length)
+        //   )
+        // )
       })
     )
   }

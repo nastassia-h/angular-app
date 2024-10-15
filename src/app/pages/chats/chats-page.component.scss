@@ -1,7 +1,7 @@
 :host {
    background: var(--dark-color);
    border: 1px solid var(--light-color);
-   height: calc(100vh - 120px);
+   //height: calc(100vh - 120px);
    overflow-y: hidden;
    display: grid;
    grid-template-columns: 300px 1fr;

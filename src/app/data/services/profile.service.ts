@@ -48,11 +48,6 @@ export class ProfileService {
   }
 
   filterAccounts(params: Record<string, any>) {
-    return this.http.get<Pageble<Profile>>(
-      `${this.baseApiUrl}accounts`,
-      {
-        params
-      }
-    )
+    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}accounts`, {params})
   }
 }

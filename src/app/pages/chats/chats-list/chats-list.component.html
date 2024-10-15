@@ -1,11 +1,11 @@
 <div class="chats-filters-input__wrapper">
    <label class="form-label">
       <span class="form-label__text">Search:</span>
-      <input type="text" class="form-input" formControlName="firstName">
+      <input type="text" class="form-input" [formControl]="filterChatsControl">
    </label>
 </div>
 
-@for(chat of chats; track chat.id) {
+@for(chat of chats$ | async; track chat.id) {
    <button 
       chats
       [chat]="chat"

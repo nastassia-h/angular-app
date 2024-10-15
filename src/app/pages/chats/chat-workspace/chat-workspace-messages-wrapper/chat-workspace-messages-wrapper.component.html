@@ -1,1 +1,12 @@
-<app-chat-workspace-message></app-chat-workspace-message>
+<div #messagesContainer class="messages-container">
+   @if (messages(); as messages) {
+      @for (message of messages; track message) {
+         <app-chat-workspace-message [message]="message"></app-chat-workspace-message>
+      }
+   }
+</div>
+
+<app-message-input class="message-input" (created)="createMessage($event, chat().id)"></app-message-input>
+
+
+

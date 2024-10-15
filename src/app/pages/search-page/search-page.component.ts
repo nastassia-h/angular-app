@@ -5,12 +5,13 @@ import { ProfileFiltersComponent } from './profile-filters/profile-filters.compo
 import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { selectFilteredProfiles } from '../../data';
-
+import { InfiniteScrollTriggerComponent } from '../../common-ui/infinite-scroll-trigger/infinite-scroll-trigger.component';
+import { profileActions } from '../../data';
 
 @Component({
   selector: 'app-search-page',
   standalone: true,
-  imports: [ProfileCardComponent, ProfileFiltersComponent, AsyncPipe],
+  imports: [ProfileCardComponent, ProfileFiltersComponent, AsyncPipe, InfiniteScrollTriggerComponent],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss'
 })
@@ -23,4 +24,8 @@ export class SearchPageComponent {
 
   //ngrx signal store
   // profiles = this.store.profiles; store = inject(ProfileStore)
+
+  fetchNextPage() {
+    this.store.dispatch(profileActions.setPage({}))
+  }
 }
