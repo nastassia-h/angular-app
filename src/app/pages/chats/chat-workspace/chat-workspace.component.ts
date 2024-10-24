@@ -28,8 +28,7 @@ export class ChatWorkspaceComponent implements AfterViewInit {
           this.chatsService.getChatById(id),
   
           // timer(3000, 10000).pipe(
-          //   switchMap(() => this.chatsService.getChatById(id)),
-          //   tap(_ => console.log('fetch chat'))
+          //   switchMap(() => this.chatsService.getChatById(id))
           // )
         );
       })
@@ -42,15 +41,14 @@ export class ChatWorkspaceComponent implements AfterViewInit {
     constructor() {
       fromEvent(window, 'resize')
         .pipe(
-          auditTime(500)
+          auditTime(250)
         )
         .subscribe(() => this.adjustHostHeight())
     }
   
     adjustHostHeight() {
       const {top} = this.hostElement.nativeElement.getBoundingClientRect();
-      const height = window.innerHeight - top - 24 - 24;
-      console.log(height)
+      let height = window.innerHeight - top - 25;
       this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`);
     }
   

@@ -11,6 +11,8 @@ import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { PostFeedComponent } from "./post-feed/post-feed.component";
 import { ChatsService } from '../../data/services/chats.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectMe } from '../../data';
 
 @Component({
   selector: 'app-profile-page',
@@ -24,8 +26,9 @@ export class ProfilePageComponent {
   chatsService = inject(ChatsService)
   route = inject(ActivatedRoute);
   router = inject(Router);
+  store = inject(Store);
 
-  me$ = toObservable(this.profileService.me);
+  me$ = toObservable(this.store.selectSignal(selectMe));
   subscribers$ = this.profileService.getSubscribersShortList(1, 5);
 
   isMe = signal<boolean>(false);

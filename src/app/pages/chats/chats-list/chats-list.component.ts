@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, HostBinding, inject, output, Renderer2, signal } from '@angular/core';
 import { ChatsBtnComponent } from "../chats-btn/chats-btn.component";
 import { ChatsService } from '../../../data/services/chats.service';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { combineLatest, map, merge, startWith, switchMap, timer } from 'rxjs';
+import { auditTime, combineLatest, fromEvent, map, merge, startWith, switchMap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-chats-list',
@@ -15,6 +15,8 @@ import { combineLatest, map, merge, startWith, switchMap, timer } from 'rxjs';
 })
 export class ChatsListComponent {
   chatsService= inject(ChatsService)
+  r2 = inject(Renderer2)
+  hostElement = inject(ElementRef)
 
   filterChatsControl = new FormControl<string>('')
 
@@ -34,4 +36,22 @@ export class ChatsListComponent {
       return filteredChats;
     })
   );
+
+  ngAfterViewInit() {
+    this.adjustHostHeight()
+  }
+
+  constructor() {
+    fromEvent(window, 'resize')
+      .pipe(
+        auditTime(250)
+      )
+      .subscribe(() => this.adjustHostHeight())
+  }
+
+  adjustHostHeight() {
+    const {top} = this.hostElement.nativeElement.getBoundingClientRect();
+    let height = window.innerHeight - top - 25;
+    this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`);
+  }
 }

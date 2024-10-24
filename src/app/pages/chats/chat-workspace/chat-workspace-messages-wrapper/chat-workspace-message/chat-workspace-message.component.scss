@@ -5,7 +5,11 @@
    &.right {
       justify-content: flex-end;
       .message-container {
-         order: -1;         
+         order: -1;   
+
+         strong {
+            justify-self: end;
+         }  
       }
       .message-text {
          background: var(--primary-color);
@@ -22,6 +26,7 @@
 }
 
 .message-text {
+   line-break: anywhere;
    background: var(--light-gray-color);
    border-top-right-radius: 10px;
    border-bottom-left-radius: 10px;

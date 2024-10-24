@@ -7,7 +7,8 @@ import { CommentComponent } from './comment/comment.component';
 import { Comment } from '../../../data/interfaces/comment.interface';
 import { CommentService } from '../../../data/services/comment.service';
 import { firstValueFrom } from 'rxjs';
-import { ProfileService } from '../../../data';
+import { ProfileService, selectMe } from '../../../data';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-post',
@@ -19,10 +20,12 @@ import { ProfileService } from '../../../data';
 export class PostComponent implements OnInit {
   post = input<Post>();
   comments = signal<Comment[]>([]); 
+  store = inject(Store);
   commentService = inject(CommentService);
   profileService = inject(ProfileService);
 
-  me = this.profileService.me;
+  me = this.store.selectSignal(selectMe);
+  isCommentsOpened = signal<boolean>(false);
 
 
   @Output() created = new EventEmitter<{data: {postId: number, text: string}}>()
@@ -34,7 +37,7 @@ export class PostComponent implements OnInit {
   handleCommentCreate(event: {data: string}) {
     firstValueFrom(this.commentService.createComment({
       text: event.data,
-      authorId: this.profileService.me()!.id,
+      authorId: this.me()!.id,
       postId: this.post()!.id,
       commentId: null,
     })).then(() => this.fetchPostComments())
@@ -43,5 +46,9 @@ export class PostComponent implements OnInit {
   async fetchPostComments() {
     const comments = await firstValueFrom(this.commentService.getCommentsByPost(this.post()!.id))
     this.comments.set(comments)
+  }
+
+  toggleComments() {
+    this.isCommentsOpened.set(!this.isCommentsOpened());
   }
 }

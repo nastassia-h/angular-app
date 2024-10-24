@@ -3,12 +3,14 @@ import { ProfileService } from '../../data/services/profile.service';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Profile } from '../../data/interfaces/profile.interface';
 import { firstValueFrom } from 'rxjs';
 import { AvatarUploadComponent } from "./avatar-upload/avatar-upload.component";
 import { StackInputComponent } from "../../common-ui/stack-input/stack-input.component";
 import { AddressInputComponent } from "../../common-ui/address-input/address-input.component";
+import { Store } from '@ngrx/store';
+import { selectMe } from '../../data';
 
 @Component({
   selector: 'app-settings-page',
@@ -19,10 +21,12 @@ import { AddressInputComponent } from "../../common-ui/address-input/address-inp
 })
 export class SettingsPageComponent {
   profileService = inject(ProfileService);
+  store = inject(Store);
+  me = this.store.selectSignal(selectMe)
 
   @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent
 
-  profile$ = toObservable(this.profileService.me);
+  profile$ = toObservable(this.me);
 
   fb = inject(FormBuilder);
 
@@ -38,7 +42,7 @@ export class SettingsPageComponent {
 
   constructor() {
     effect(() => {
-      const profile = this.profileService.me();
+      const profile = this.me();
       if (profile) {
         this.form.patchValue(profile)
       }

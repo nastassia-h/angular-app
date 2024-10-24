@@ -1,7 +1,7 @@
 @if (profile) {
 <div class="profile-card">
    <div class="profile-card__grid mb20">
-      <div class="avatar-name">
+      <div class="avatar-name" [routerLink]="['/profile', profile.id]">
          <img 
             [src]="profile.avatarUrl | imgUrl" 
             alt="avatar" 

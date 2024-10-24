@@ -11,24 +11,34 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStates } from '@ngxs/store';
 import { ProfileState } from './data/store/state.ngxs';
 import { profileStore } from './data/store/profile.store';
+import { chatsRoutes } from './pages/chats/chatsRoutes';
+import { FormLearningPageComponent } from './pages/form-learning-page/form-learning-page.component';
 
 export const routes: Routes = [
-   {path: '', component: LayoutComponent, children: [
-      {path: '', redirectTo: 'profile/me', pathMatch: 'full'},
-      {
-         path: 'search', 
-         component: SearchPageComponent,
-         providers: [
-            profileStore,
-            provideStates([ProfileState]),
-            provideState(profileFeature),
-            provideEffects(ProfileEffects)
-         ]
-      },
-      {path: 'settings', component: SettingsPageComponent},
-      {path: 'profile/:id', component: ProfilePageComponent}
-   ],
+   {
+      path: '', 
+      component: LayoutComponent, 
+      providers: [
+         profileStore,
+         provideStates([ProfileState]),
+         provideState(profileFeature),
+         provideEffects(ProfileEffects)
+      ],
+      children: [
+         {path: '', redirectTo: 'profile/me', pathMatch: 'full'},
+         {
+            path: 'search', 
+            component: SearchPageComponent
+         },
+         {path: 'settings', component: SettingsPageComponent},
+         {path: 'profile/:id', component: ProfilePageComponent},
+         {
+            path: 'chats', 
+            loadChildren: () => chatsRoutes
+         }
+      ],
    canActivate: [canActivateAuth]
    },
    {path: 'login', component: LoginPageComponent},
+   {path: 'formslearn', component: FormLearningPageComponent}
 ];

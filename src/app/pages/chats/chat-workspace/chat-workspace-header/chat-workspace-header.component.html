@@ -1,3 +1,7 @@
+<button class="return-btn btn-icon" [routerLink]="'/chats'">
+   <img src="/assets/svg/return.svg" alt="return to chats list button">
+</button>
+
 @if (profile(); as profile) {
    <app-avatar-circle class="size32" [avatarUrl]="profile.avatarUrl"></app-avatar-circle>
    <div class="subtitle">{{ profile.firstName }}  {{ profile.lastName }}</div>

@@ -8,3 +8,20 @@
 .username-and-name {
    text-align: left;
 }
+
+@media (max-width: 600px) {
+   :host {
+      grid-template-columns: 80px 1fr;
+
+      ::ng-deep app-avatar-circle {
+         width: 80px;
+         height: 80px;
+         img {
+            width: 100%;
+            height: 100%;
+         }
+      }
+     
+
+   }
+}

@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Comment, CommentCreateDto } from "../interfaces/comment.interface";
 import { PostService } from "./post.service";
 import { Post } from "../interfaces/post.interface";
-import { map, switchMap, tap } from "rxjs";
+import { map } from "rxjs";
 
 
 @Injectable({

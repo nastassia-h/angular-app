@@ -20,3 +20,13 @@ export const selectProfilePageable = createSelector(
       }
    }
 )
+
+export const selectMe = createSelector(
+   profileFeature.selectMe,
+   (me) => me
+)
+
+export const selectUnreadMsg = createSelector(
+   profileFeature.selectUnreadMsg,
+   (unreadMsg) => unreadMsg
+)

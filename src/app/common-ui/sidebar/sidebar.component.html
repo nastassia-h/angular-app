@@ -17,6 +17,9 @@
                   <a class="menu-item" [routerLink]="[item.link]" (click)="closeMenu()" routerLinkActive="active">
                      <!-- <svg class="menu-item__icon" icon="home"></svg> -->
                      <span>{{ item.label }}</span>
+                     @if(item.link === 'chats') {
+                        <span>{{ unreadMsg() }}</span>
+                     }
                   </a>
                </li>
                }
@@ -26,7 +29,7 @@
       <p class="medium-text mb20">Subscribers</p>
    
       @for(profile of subscribers$ | async; track profile.id) {
-         <app-subscriber-card [profile]="profile"></app-subscriber-card>
+         <app-subscriber-card [routerLink]="['/profile', profile.id]" [profile]="profile"></app-subscriber-card>
       }
    
       <div class="mt20 to-subscribers">
@@ -44,7 +47,7 @@
             <img class="sidebar-footer__avatar" src="/assets/img/avatar.png" alt="avatar placeholder">
          }
          <div class="medium-text sidebar-footer__username">{{ me.username }}</div>
-         <a class="sidebar-footer__settings" [routerLink]="['settings']">
+         <a class="sidebar-footer__settings" [routerLink]="['settings']" (click)="closeMenu()">
             <img src="/assets/svg/settings.svg" alt="settings icon">
          </a>
       }

@@ -14,24 +14,28 @@
       <div class="post-content medium-text">{{ post.content }}</div>
 
       <div class="post-counters ">
-         <span class="comment-amount">
-            <span class="comments-length">Comments: {{ comments().length }}</span>
+         <span class="comment-amount" (click)="toggleComments()">
+            <img width="16px" height="16px" src="/assets/svg/comment.svg" alt="comment button">
+            <span class="comments-length">{{ comments().length }}</span>
          </span>
          <span class="likes-amount">
-            <span class="likes-length">Likes: {{ post.likes }}</span>
+            <img width="16px" height="16px" src="/assets/svg/heart.svg" alt="comment button">
+            <span class="likes-length">{{ post.likes }}</span>
          </span>
       </div>
 
-      <div class="post__comments-wrapper">
-         @for(comment of comments(); track comment.id) {
-            <app-comment [comment]="comment"></app-comment>
-         }
-      </div>
-
-      <app-post-input
-         class="comment"
-         [avatarUrl]="me()!.avatarUrl"
-         (created)="handleCommentCreate($event)"
-      ></app-post-input>
+      @if( isCommentsOpened() ) {
+         <app-post-input
+            class="comment"
+            [avatarUrl]="me()!.avatarUrl"
+            (created)="handleCommentCreate($event)"
+         ></app-post-input>
+         <div class="post__comments-wrapper">
+            @for(comment of comments(); track comment.id) {
+               <app-comment [comment]="comment"></app-comment>
+            }
+         </div>
+      }
+      
    </main>
 } 

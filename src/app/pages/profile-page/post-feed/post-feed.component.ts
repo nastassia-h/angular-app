@@ -3,8 +3,9 @@ import { PostInputComponent } from "../post-input/post-input.component";
 import { PostComponent } from "../post/post.component";
 import { PostService } from '../../../data/services/post.service';
 import { auditTime, firstValueFrom, fromEvent } from 'rxjs';
-import { ProfileService } from '../../../data';
+import { selectMe } from '../../../data';
 import { CommentService } from '../../../data/services/comment.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-post-feed',
@@ -16,10 +17,10 @@ import { CommentService } from '../../../data/services/comment.service';
 export class PostFeedComponent implements AfterViewInit {
   postService = inject(PostService)
   commentService = inject(CommentService)
-  profileService = inject(ProfileService)
+  store = inject(Store)
   r2 = inject(Renderer2)
   feed = this.postService.posts
-  me = this.profileService.me
+  me = this.store.selectSignal(selectMe)
 
   hostElement = inject(ElementRef)
 
@@ -44,7 +45,8 @@ export class PostFeedComponent implements AfterViewInit {
 
   adjustHostHeight() {
     const {top} = this.hostElement.nativeElement.getBoundingClientRect();
-    const height = window.innerHeight - top - 24 - 24;
+    let height = window.innerHeight - top - 24 - 24;
+    height = (window.innerWidth < 1200) ? height + top : height
     this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`);
   }
 
@@ -52,7 +54,7 @@ export class PostFeedComponent implements AfterViewInit {
     firstValueFrom(this.postService.createPost({
       title: 'Test',
       content: event.data,
-      authorId: this.profileService.me()!.id
+      authorId: this.me()!.id
     }))
   }
 }

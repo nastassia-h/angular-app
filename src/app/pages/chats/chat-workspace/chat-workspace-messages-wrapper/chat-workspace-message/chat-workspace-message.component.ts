@@ -1,8 +1,9 @@
 import {  Component, HostBinding, inject, input } from '@angular/core';
 import { Message } from '../../../../../data/interfaces/chat.interface';
-import { ProfileService } from '../../../../../data';
+import { selectMe } from '../../../../../data';
 import { AvatarCircleComponent } from "../../../../../common-ui/avatar-circle/avatar-circle.component";
 import { DatePipe } from '@angular/common';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-chat-workspace-message',
@@ -13,14 +14,11 @@ import { DatePipe } from '@angular/common';
 })
 export class ChatWorkspaceMessageComponent  {
   message = input.required<Message>();
-  me = inject(ProfileService).me;
-
-  
+  store = inject(Store);
+  me = this.store.selectSignal(selectMe);
 
   @HostBinding('class.right')
   get right() {
     return this.message().isMine
   }
-
-  
 }

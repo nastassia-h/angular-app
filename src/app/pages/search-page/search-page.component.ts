@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { selectFilteredProfiles } from '../../data';
 import { InfiniteScrollTriggerComponent } from '../../common-ui/infinite-scroll-trigger/infinite-scroll-trigger.component';
 import { profileActions } from '../../data';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
@@ -17,7 +18,8 @@ import { profileActions } from '../../data';
 })
 export class SearchPageComponent {
   store = inject(Store);
-  profiles = this.store.selectSignal(selectFilteredProfiles);
+  profiles = this.store.selectSignal(selectFilteredProfiles)
+  
 
   // ngxs
   // profiles = this.store.selectSignal(ProfileState.getProfiles); store from ngxs

@@ -1,10 +1,14 @@
 <app-post-input
+   class="post-input"
    [avatarUrl]="me()!.avatarUrl"
    (created)="handlePostCreated($event)"
 ></app-post-input>
 
-@for(post of feed(); track post.id) {
-   <app-post 
-      [post]="post"
-   ></app-post>
-}
+<div #postFeedContainer class="post-feed-container">
+   @for(post of feed(); track post.id) {
+      <app-post 
+         [post]="post"
+      ></app-post>
+   }
+</div>
+

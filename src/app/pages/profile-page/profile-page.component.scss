@@ -7,6 +7,12 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
+   padding: 24px;
+   gap: 20px;
+
+   ::ng-deep app-profile-header {
+      padding: 0;
+   }
 }
 
 .profile-header {
@@ -86,5 +92,17 @@
 @media (max-width: 1200px) {
    .profile-page__body {
       grid-template-columns: 1fr;
+      grid-gap: 24px;
+
+      ::ng-deep app-post-feed {
+         order: 2;
+      }
+   }
+}
+
+@media (max-width: 600px) {
+   .profile-page__header {
+      flex-direction: column;
+      align-items: flex-start;
    }
 }

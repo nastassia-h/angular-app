@@ -1,5 +1,6 @@
 :host {
-   
+   position: fixed;
+   width: 300px;
 
 }
 
@@ -17,6 +18,10 @@
 
    &-main {
       flex: 1;
+
+      ::ng-deep app-subscriber-card {
+         cursor: pointer;
+      }
    }
 
    &__logo {
@@ -142,7 +147,7 @@
    }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
 
    :host {
       position: fixed;
@@ -150,6 +155,7 @@
       width: 100%;
       padding: 24px 24px;
       background: var(--dark-color);
+      z-index: 100;
 
       &.open {
          .sidebar {

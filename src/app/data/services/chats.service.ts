@@ -1,20 +1,66 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Chat, Message, MyChat } from '../interfaces/chat.interface';
-import { ProfileService } from './profile.service';
 import { map } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { profileActions, selectMe } from '../store';
+import { WSChatsService } from './ws-chats.service';
+import { WSMessage } from '../interfaces/ws-message.interface';
+import { isErrorWsMessage, isNewWSMessage, isUnreadWSMessage } from '../interfaces/ws-message-guard';
+import { AuthService } from '../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatsService {
   #http = inject(HttpClient);
-  me = inject(ProfileService).me;
+  authService = inject(AuthService)
+  store = inject(Store);
+  me = this.store.selectSignal(selectMe);
   baseApiUrl = 'https://icherniakov.ru/yt-course/';
   chatsUrl = `${this.baseApiUrl}chat/`;
   messageUrl = `${this.baseApiUrl}message/`
 
   activeChatMessages = signal<Message[]>([])
+
+  WSChatsService = new WSChatsService()
+
+  connectWS() {
+    this.WSChatsService.connect({
+      url: `${this.chatsUrl}ws`,
+      token: this.authService.token ?? '',
+      handleMessage: this.handleMessage
+    })
+  }
+
+  handleMessage = (message: WSMessage) => {
+    if (isNewWSMessage(message)) {
+      this.activeChatMessages.set([
+        ...this.activeChatMessages(),
+        {
+          id: message.data.id,
+          userFromId: message.data.author_id,
+          personalChatId: message.data.chat_id,
+          text: message.data.message,
+          createdAt: message.data.created_at,
+          isRead: false,
+          isMine: false,
+        }
+      ])
+
+      return;
+    }
+
+    if (isErrorWsMessage(message)) {
+      this.connectWS();
+      return;
+    }
+
+    if (isUnreadWSMessage(message)) {
+      this.store.dispatch(profileActions.setUnreadMsg({unreadMsg: message.data.count}))
+      return;
+    }
+  }
 
   createChat(userId: number) {
     return this.#http.post<Chat>(`${this.chatsUrl}${userId}`, {})
@@ -48,6 +94,4 @@ export class ChatsService {
   sendMessage(chatId: number, message: string) {
     return this.#http.post<Message>(`${this.messageUrl}send/${chatId}`, {}, {params: {message}})
   }
-
-  
 }
