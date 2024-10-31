@@ -11,3 +11,13 @@ export const canActivateAuth = () => {
 
    return inject(Router).createUrlTree(['/login']);
 }
+
+export const cannotActivateAuth = () => {
+   const isLoggedIn = inject(AuthService).isAuth
+
+   if (!isLoggedIn) {
+      return true;
+   }
+
+   return inject(Router).createUrlTree(['']);
+}

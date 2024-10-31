@@ -6,6 +6,16 @@ export const selectFilteredProfiles = createSelector(
    (profiles) => profiles
 )
 
+export const selectSubscriptions = createSelector(
+   profileFeature.selectSubscriptions,
+   (profiles) => profiles
+)
+
+export const selectSubscribers = createSelector(
+   profileFeature.selectSubscribers,
+   (profiles) => profiles
+)
+
 export const selectProfileFilters = createSelector(
    profileFeature.selectProfileFilters,
    (filters) => filters

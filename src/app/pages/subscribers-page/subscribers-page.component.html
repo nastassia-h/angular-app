@@ -1,0 +1,19 @@
+<h1 class="h3 mb20">Subscribers</h1>
+
+<div class="profile-card__wrapper">
+   @for (profile of subscribers(); track profile.id; let last = $last) {
+      <app-profile-card
+      
+      [profile]="profile"
+      ></app-profile-card>
+      @if (last) {
+         @defer (on viewport) {
+            <app-infinite-scroll-trigger
+               (loaded)="fetchNextPage()"
+            ></app-infinite-scroll-trigger>
+         } @placeholder {
+            <div></div>
+         }
+      }
+   }
+</div>

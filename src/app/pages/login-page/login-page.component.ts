@@ -2,13 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { LoginPayload } from '../../data/interfaces/login.payload.interface';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TtInputComponent } from "../../common-ui/tt-input/tt-input.component";
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [ReactiveFormsModule, TtInputComponent],
+  imports: [ReactiveFormsModule, TtInputComponent, RouterLink],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })

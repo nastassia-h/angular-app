@@ -4,11 +4,11 @@ import { SubscriberCardComponent } from './subscriber-card/subscriber-card.compo
 import { RouterLink } from '@angular/router';
 import { ProfileService } from '../../data/services/profile.service';
 import { AsyncPipe } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, tap } from 'rxjs';
 import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { RouterLinkActive } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectMe, selectUnreadMsg } from '../../data';
+import { profileActions, selectMe, selectSubscriptions, selectUnreadMsg } from '../../data';
 import { ChatsService } from '../../data/services/chats.service';
 
 @Component({
@@ -25,6 +25,7 @@ export class SidebarComponent {
   subscribers$ = this.profileService.getSubscribersShortList(1, 3);
   me = this.store.selectSignal(selectMe)
   unreadMsg = this.store.selectSignal(selectUnreadMsg)
+  subscriptions = this.store.selectSignal(selectSubscriptions)
 
   @HostBinding('class.open')
   isOpened = false
@@ -43,11 +44,25 @@ export class SidebarComponent {
     {
       label: 'Search',
       link: 'search'
+    },
+    {
+      label: 'Subscriptions',
+      link: 'subscriptions'
     }
   ]
 
   async ngOnInit() {
     await firstValueFrom(this.profileService.getMe())
+
+    await firstValueFrom(this.profileService.getSubscriptions({})
+      .pipe(
+        tap(res => this.store.dispatch(profileActions.subscriptionsLoaded({profiles: res})))
+      ))
+
+    await firstValueFrom(this.profileService.getSubscribersShortList(1, 50)
+    .pipe(
+      tap(res => this.store.dispatch(profileActions.subscribersLoaded({profiles: res})))
+    ))
     this.chatsService.connectWS();
   }
 

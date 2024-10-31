@@ -8,7 +8,9 @@ export interface Profile {
    description: string,
    isActive: boolean,
    stack: string[],
-   city: string
+   city: string,
+   isSubscriber?: boolean,
+   isSubscpription?: boolean, 
 }
 
 export interface ProfileShort {

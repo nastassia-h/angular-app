@@ -1,0 +1,57 @@
+<form action="" class="login-form" [formGroup]="form" (ngSubmit)="onSubmit($event)">
+   <h1 class="h1 mb60">Register</h1>
+
+   <app-tt-input
+      placeholder="Enter Firstname"
+      formControlName="firstname"
+   >Firstname</app-tt-input>
+
+   <app-tt-input
+      placeholder="Enter Lastname"
+      formControlName="lastname"
+   >Lastname</app-tt-input>
+
+   <app-tt-input
+      placeholder="Enter Username"
+      formControlName="username"
+   >Username</app-tt-input>
+
+   <app-tt-input
+      placeholder="Enter city"
+      formControlName="city"
+   >City</app-tt-input>
+   
+   <app-tt-input
+      [type]="isPasswordVisible() ? 'text' : 'password'" 
+      placeholder="Enter password"
+      formControlName="password"
+   >
+   Password 
+   <button class="password-eye-btn" (click)="isPasswordVisible.set(!isPasswordVisible())">
+      @if (isPasswordVisible()) {
+         <img src="/assets/svg/eye-close-4.svg" alt="eye-close-icon" />
+      } @else {
+         <img src="/assets/svg/eye-open-4.svg" alt="eye-open-icon" />
+      }
+   </button>
+   </app-tt-input>
+
+   <app-tt-input
+      [type]="isPasswordConfirmVisible() ? 'text' : 'password'" 
+      placeholder="Enter password confirmation"
+      formControlName="passwordConfirm"
+   >
+   Password confirmation
+   <button class="password-eye-btn" (click)="isPasswordVisible.set(!isPasswordVisible())">
+      @if (isPasswordVisible()) {
+         <img src="/assets/svg/eye-close-4.svg" alt="eye-close-icon" />
+      } @else {
+         <img src="/assets/svg/eye-open-4.svg" alt="eye-open-icon" />
+      }
+   </button>
+   </app-tt-input>
+
+   <button class="btn login-form__btn btn-shadow" type="submit">Sign up</button>
+</form>
+<a class="subtitle mb20 pointer" [routerLink]="['/login']">Already have an account? Log in here</a>
+<img class="login-page__logo" src="/assets/img/logo.png" alt="logo">

@@ -24,4 +24,10 @@ export interface ErrorWSMessage extends BaseWSMessage {
    message: string
 }
 
-export type WSMessage = NewWSMessage | UnreadWSMessage | ErrorWSMessage
+export interface sendWSMessage {
+   status?: string,
+   text: string,
+   chat_id: number
+}
+
+export type WSMessage = NewWSMessage | UnreadWSMessage | ErrorWSMessage | sendWSMessage

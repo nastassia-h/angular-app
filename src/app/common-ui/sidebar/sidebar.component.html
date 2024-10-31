@@ -20,6 +20,9 @@
                      @if(item.link === 'chats') {
                         <span>{{ unreadMsg() }}</span>
                      }
+                     @if(item.link === 'subscriptions') {
+                        <span>{{ subscriptions().length }}</span>
+                     }
                   </a>
                </li>
                }
@@ -29,7 +32,7 @@
       <p class="medium-text mb20">Subscribers</p>
    
       @for(profile of subscribers$ | async; track profile.id) {
-         <app-subscriber-card [routerLink]="['/profile', profile.id]" [profile]="profile"></app-subscriber-card>
+         <app-subscriber-card [routerLink]="['/profile', profile.id]" [profile]="profile" (click)="closeMenu()"></app-subscriber-card>
       }
    
       <div class="mt20 to-subscribers">

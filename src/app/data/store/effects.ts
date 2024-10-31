@@ -31,4 +31,26 @@ export class ProfileEffects {
          map(res => profileActions.profilesLoaded({profiles: res.items}))
       )
    })
+
+   subscribeProfile = createEffect(() => {
+      return this.actions$.pipe(
+         ofType(profileActions.subscribe),
+         switchMap(action =>
+            this.profileService.subscribe(action.id).pipe(
+               map(() => profileActions.subscribeSuccess({ id: action.id })),
+            )
+         )
+      )
+   });
+
+   unsubscribeProfile$ = createEffect(() => {
+      return this.actions$.pipe(
+         ofType(profileActions.unsubscribe),
+         switchMap(action =>
+            this.profileService.unsubscribe(action.id).pipe(
+               map(() => profileActions.unsubscribeSuccess({ id: action.id })),
+            )
+         )
+      )
+   });
 }

@@ -13,17 +13,20 @@
       <app-post-feed></app-post-feed>
 
       <div>
-         <h3 class="h6 mb16">Subscribers</h3>
-         <div class="profile-page__subscribers mb32">
-            <div class="subscribers-wrapper">
-               @for(subscriber of subscribers$ | async; track subscriber.id) {
-                  <a [routerLink]="['/profile', subscriber.id]" class="subscriber-avatar-btn">
-                     <img class="subscriber-avatar" [src]="subscriber.avatarUrl| imgUrl" alt="">
-                  </a>
-               }
+         @if (isMe()) {
+            <h3 class="h6 mb16">Subscribers</h3>
+            <div class="profile-page__subscribers mb32">
+               <div class="subscribers-wrapper">
+                  @for(subscriber of subscribers$ | async; track subscriber.id) {
+                     <a [routerLink]="['/profile', subscriber.id]" class="subscriber-avatar-btn">
+                        <img class="subscriber-avatar" [src]="subscriber.avatarUrl| imgUrl" alt="">
+                     </a>
+                  }
+               </div>
+               <a [routerLink]="['/search']" class="to-subscribers-search"></a>
             </div>
-            <a [routerLink]="['/search']" class="to-subscribers-search"></a>
-         </div>
+         }
+         
          <h3 class="h6 mb16">Skills</h3>
          <div class="profile-page__skills mb32">
             @for(skill of profile.stack; track skill) {

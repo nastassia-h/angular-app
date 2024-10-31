@@ -36,6 +36,21 @@ export class ProfileService {
       );
   }
 
+  getSubscriptions(params: Record<string, any>) {
+    return this.http.get<Pageble<Profile>>(`${this.baseApiUrl}subscriptions/`, {params})
+      .pipe(
+        map(res => res.items)
+      );
+  }
+
+  subscribe(id: number) {
+    return this.http.post<string>(`${this.baseApiUrl}subscribe/${id}`, {})
+  }
+
+  unsubscribe(id: number) {
+    return this.http.delete<string>(`${this.baseApiUrl}subscribe/${id}`, {})
+  }
+
   patchProfile(profile: Partial<Profile>) {
     return this.http.patch<Profile>(`${this.baseApiUrl}me`, profile)
       .pipe(
